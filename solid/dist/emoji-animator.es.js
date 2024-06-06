@@ -1,25 +1,25 @@
 const O = { equals: (t, s) => t === s };
-let D = Q;
-const S = 1, T = 2, Y = { owned: null, cleanups: null, context: null, owner: null };
+let G = R;
+const S = 1, T = 2, Z = { owned: null, cleanups: null, context: null, owner: null };
 var A = null;
-let Z, P = null, g = null, y = null, w = null, z = 0;
+let _, P = null, v = null, y = null, w = null, z = 0;
 function F(t, s, e) {
-  k(K(t, s, !1, S));
+  k(Q(t, s, !1, S));
 }
-function _(t, s, e) {
-  D = tt;
-  const r = K(t, s, !1, S), o = Z;
+function U(t, s, e) {
+  G = tt;
+  const r = Q(t, s, !1, S), n = _;
   e && e.render || (r.user = !0), w ? w.push(r) : k(r);
 }
-function G(t) {
-  if (g === null)
+function J(t) {
+  if (v === null)
     return t();
-  const s = g;
-  g = null;
+  const s = v;
+  v = null;
   try {
     return t();
   } finally {
-    g = s;
+    v = s;
   }
 }
 function $() {
@@ -30,18 +30,18 @@ function $() {
       const t = y;
       y = null, q(() => E(this), !1), y = t;
     }
-  if (g) {
+  if (v) {
     const t = this.observers ? this.observers.length : 0;
-    g.sources ? (g.sources.push(this), g.sourceSlots.push(t)) : (g.sources = [this], g.sourceSlots = [t]), this.observers ? (this.observers.push(g), this.observerSlots.push(g.sources.length - 1)) : (this.observers = [g], this.observerSlots = [g.sources.length - 1]);
+    v.sources ? (v.sources.push(this), v.sourceSlots.push(t)) : (v.sources = [this], v.sourceSlots = [t]), this.observers ? (this.observers.push(v), this.observerSlots.push(v.sources.length - 1)) : (this.observers = [v], this.observerSlots = [v.sources.length - 1]);
   }
   return this.value;
 }
-function J(t, s, e) {
+function K(t, s, e) {
   let r = t.value;
   return t.comparator && t.comparator(r, s) || (t.value = s, t.observers && t.observers.length && q(() => {
-    for (let o = 0; o < t.observers.length; o += 1) {
-      const n = t.observers[o], u = P && P.running;
-      u && P.disposed.has(n), (u ? n.tState : n.state) || (n.pure ? y.push(n) : w.push(n), n.observers && R(n)), u || (n.state = S);
+    for (let n = 0; n < t.observers.length; n += 1) {
+      const o = t.observers[n], u = P && P.running;
+      u && P.disposed.has(o), (u ? o.tState : o.state) || (o.pure ? y.push(o) : w.push(o), o.observers && V(o)), u || (o.state = S);
     }
     if (y.length > 1e6)
       throw y = [], new Error();
@@ -52,30 +52,30 @@ function k(t) {
     return;
   H(t);
   const s = z;
-  (function(e, r, o) {
-    let n;
-    const u = A, l = g;
-    g = A = e;
+  (function(e, r, n) {
+    let o;
+    const u = A, l = v;
+    v = A = e;
     try {
-      n = e.fn(r);
+      o = e.fn(r);
     } catch (i) {
-      return e.pure && (e.state = S, e.owned && e.owned.forEach(H), e.owned = null), e.updatedAt = o + 1, V(i);
+      return e.pure && (e.state = S, e.owned && e.owned.forEach(H), e.owned = null), e.updatedAt = n + 1, W(i);
     } finally {
-      g = l, A = u;
+      v = l, A = u;
     }
-    (!e.updatedAt || e.updatedAt <= o) && (e.updatedAt != null && "observers" in e ? J(e, n) : e.value = n, e.updatedAt = o);
+    (!e.updatedAt || e.updatedAt <= n) && (e.updatedAt != null && "observers" in e ? K(e, o) : e.value = o, e.updatedAt = n);
   })(t, t.value, s);
 }
-function K(t, s, e, r = S, o) {
-  const n = { fn: t, state: r, updatedAt: null, owned: null, sources: null, sourceSlots: null, cleanups: null, value: s, owner: A, context: A ? A.context : null, pure: e };
-  return A === null || A !== Y && (A.owned ? A.owned.push(n) : A.owned = [n]), n;
+function Q(t, s, e, r = S, n) {
+  const o = { fn: t, state: r, updatedAt: null, owned: null, sources: null, sourceSlots: null, cleanups: null, value: s, owner: A, context: A ? A.context : null, pure: e };
+  return A === null || A !== Z && (A.owned ? A.owned.push(o) : A.owned = [o]), o;
 }
 function B(t) {
   if (t.state === 0)
     return;
   if (t.state === T)
     return E(t);
-  if (t.suspense && G(t.suspense.inFallback))
+  if (t.suspense && J(t.suspense.inFallback))
     return t.suspense.effects.push(t);
   const s = [t];
   for (; (t = t.owner) && (!t.updatedAt || t.updatedAt < z); )
@@ -95,17 +95,17 @@ function q(t, s) {
   s || (y = []), w ? e = !0 : w = [], z++;
   try {
     const r = t();
-    return function(o) {
-      if (y && (Q(y), y = null), o)
+    return function(n) {
+      if (y && (R(y), y = null), n)
         return;
-      const n = w;
-      w = null, n.length && q(() => D(n), !1);
+      const o = w;
+      w = null, o.length && q(() => G(o), !1);
     }(e), r;
   } catch (r) {
-    e || (w = null), y = null, V(r);
+    e || (w = null), y = null, W(r);
   }
 }
-function Q(t) {
+function R(t) {
   for (let s = 0; s < t.length; s++)
     B(t[s]);
 }
@@ -123,25 +123,25 @@ function E(t, s) {
   for (let e = 0; e < t.sources.length; e += 1) {
     const r = t.sources[e];
     if (r.sources) {
-      const o = r.state;
-      o === S ? r !== s && (!r.updatedAt || r.updatedAt < z) && B(r) : o === T && E(r, s);
+      const n = r.state;
+      n === S ? r !== s && (!r.updatedAt || r.updatedAt < z) && B(r) : n === T && E(r, s);
     }
   }
 }
-function R(t) {
+function V(t) {
   for (let s = 0; s < t.observers.length; s += 1) {
     const e = t.observers[s];
-    e.state || (e.state = T, e.pure ? y.push(e) : w.push(e), e.observers && R(e));
+    e.state || (e.state = T, e.pure ? y.push(e) : w.push(e), e.observers && V(e));
   }
 }
 function H(t) {
   let s;
   if (t.sources)
     for (; t.sources.length; ) {
-      const e = t.sources.pop(), r = t.sourceSlots.pop(), o = e.observers;
-      if (o && o.length) {
-        const n = o.pop(), u = e.observerSlots.pop();
-        r < o.length && (n.sourceSlots[u] = r, o[r] = n, e.observerSlots[r] = u);
+      const e = t.sources.pop(), r = t.sourceSlots.pop(), n = e.observers;
+      if (n && n.length) {
+        const o = n.pop(), u = e.observerSlots.pop();
+        r < n.length && (o.sourceSlots[u] = r, n[r] = o, e.observerSlots[r] = u);
       }
     }
   if (t.owned) {
@@ -156,35 +156,35 @@ function H(t) {
   }
   t.state = 0;
 }
-function V(t, s = A) {
+function W(t, s = A) {
   throw function(r) {
     return r instanceof Error ? r : new Error(typeof r == "string" ? r : "Unknown error", { cause: r });
   }(t);
 }
 function et(t, s, e) {
   let r;
-  const o = () => {
+  const n = () => {
     const u = document.createElement("template");
     return u.innerHTML = t, e ? u.content.firstChild.firstChild : u.content.firstChild;
-  }, n = s ? () => G(() => document.importNode(r || (r = o()), !0)) : () => (r || (r = o())).cloneNode(!0);
-  return n.cloneNode = n, n;
+  }, o = s ? () => J(() => document.importNode(r || (r = n()), !0)) : () => (r || (r = n())).cloneNode(!0);
+  return o.cloneNode = o, o;
 }
-function j(t, s, e, r, o) {
+function j(t, s, e, r, n) {
   for (; typeof e == "function"; )
     e = e();
   if (s === e)
     return e;
-  const n = typeof s, u = r !== void 0;
-  if (t = u && e[0] && e[0].parentNode || t, n === "string" || n === "number")
-    if (n === "number" && (s = s.toString()), u) {
+  const o = typeof s, u = r !== void 0;
+  if (t = u && e[0] && e[0].parentNode || t, o === "string" || o === "number")
+    if (o === "number" && (s = s.toString()), u) {
       let l = e[0];
       l && l.nodeType === 3 ? l.data !== s && (l.data = s) : l = document.createTextNode(s), e = N(t, e, r, l);
     } else
       e = e !== "" && typeof e == "string" ? t.firstChild.data = s : t.textContent = s;
-  else if (s == null || n === "boolean")
+  else if (s == null || o === "boolean")
     e = N(t, e, r);
   else {
-    if (n === "function")
+    if (o === "function")
       return F(() => {
         let l = s();
         for (; typeof l == "function"; )
@@ -193,55 +193,55 @@ function j(t, s, e, r, o) {
       }), () => e;
     if (Array.isArray(s)) {
       const l = [], i = e && Array.isArray(e);
-      if (L(l, s, e, o))
+      if (L(l, s, e, n))
         return F(() => e = j(t, l, e, r, !0)), () => e;
       if (l.length === 0) {
         if (e = N(t, e, r), u)
           return e;
       } else
-        i ? e.length === 0 ? U(t, l, r) : function(p, a, f) {
-          let b = f.length, d = a.length, c = b, h = 0, v = 0, W = a[d - 1].nextSibling, x = null;
-          for (; h < d || v < c; )
-            if (a[h] !== f[v]) {
-              for (; a[d - 1] === f[c - 1]; )
-                d--, c--;
-              if (d === h) {
-                const m = c < b ? v ? f[v - 1].nextSibling : f[c - v] : W;
-                for (; v < c; )
-                  p.insertBefore(f[v++], m);
-              } else if (c === v)
-                for (; h < d; )
-                  x && x.has(a[h]) || a[h].remove(), h++;
-              else if (a[h] === f[c - 1] && f[v] === a[d - 1]) {
-                const m = a[--d].nextSibling;
-                p.insertBefore(f[v++], a[h++].nextSibling), p.insertBefore(f[--c], m), a[d] = f[c];
+        i ? e.length === 0 ? D(t, l, r) : function(h, a, f) {
+          let b = f.length, p = a.length, c = b, d = 0, g = 0, X = a[p - 1].nextSibling, x = null;
+          for (; d < p || g < c; )
+            if (a[d] !== f[g]) {
+              for (; a[p - 1] === f[c - 1]; )
+                p--, c--;
+              if (p === d) {
+                const m = c < b ? g ? f[g - 1].nextSibling : f[c - g] : X;
+                for (; g < c; )
+                  h.insertBefore(f[g++], m);
+              } else if (c === g)
+                for (; d < p; )
+                  x && x.has(a[d]) || a[d].remove(), d++;
+              else if (a[d] === f[c - 1] && f[g] === a[p - 1]) {
+                const m = a[--p].nextSibling;
+                h.insertBefore(f[g++], a[d++].nextSibling), h.insertBefore(f[--c], m), a[p] = f[c];
               } else {
                 if (!x) {
                   x = /* @__PURE__ */ new Map();
-                  let C = v;
+                  let C = g;
                   for (; C < c; )
                     x.set(f[C], C++);
                 }
-                const m = x.get(a[h]);
+                const m = x.get(a[d]);
                 if (m != null)
-                  if (v < m && m < c) {
-                    let C, I = h, M = 1;
-                    for (; ++I < d && I < c && (C = x.get(a[I])) != null && C === m + M; )
+                  if (g < m && m < c) {
+                    let C, I = d, M = 1;
+                    for (; ++I < p && I < c && (C = x.get(a[I])) != null && C === m + M; )
                       M++;
-                    if (M > m - v) {
-                      const X = a[h];
-                      for (; v < m; )
-                        p.insertBefore(f[v++], X);
+                    if (M > m - g) {
+                      const Y = a[d];
+                      for (; g < m; )
+                        h.insertBefore(f[g++], Y);
                     } else
-                      p.replaceChild(f[v++], a[h++]);
+                      h.replaceChild(f[g++], a[d++]);
                   } else
-                    h++;
+                    d++;
                 else
-                  a[h++].remove();
+                  a[d++].remove();
               }
             } else
-              h++, v++;
-        }(t, e, l) : (e && N(t), U(t, l));
+              d++, g++;
+        }(t, e, l) : (e && N(t), D(t, l));
       e = l;
     } else if (s.nodeType) {
       if (Array.isArray(e)) {
@@ -256,68 +256,70 @@ function j(t, s, e, r, o) {
   return e;
 }
 function L(t, s, e, r) {
-  let o = !1;
-  for (let n = 0, u = s.length; n < u; n++) {
-    let l, i = s[n], p = e && e[t.length];
+  let n = !1;
+  for (let o = 0, u = s.length; o < u; o++) {
+    let l, i = s[o], h = e && e[t.length];
     if (!(i == null || i === !0 || i === !1))
       if ((l = typeof i) == "object" && i.nodeType)
         t.push(i);
       else if (Array.isArray(i))
-        o = L(t, i, p) || o;
+        n = L(t, i, h) || n;
       else if (l === "function")
         if (r) {
           for (; typeof i == "function"; )
             i = i();
-          o = L(t, Array.isArray(i) ? i : [i], Array.isArray(p) ? p : [p]) || o;
+          n = L(t, Array.isArray(i) ? i : [i], Array.isArray(h) ? h : [h]) || n;
         } else
-          t.push(i), o = !0;
+          t.push(i), n = !0;
       else {
         const a = String(i);
-        p && p.nodeType === 3 && p.data === a ? t.push(p) : t.push(document.createTextNode(a));
+        h && h.nodeType === 3 && h.data === a ? t.push(h) : t.push(document.createTextNode(a));
       }
   }
-  return o;
+  return n;
 }
-function U(t, s, e = null) {
-  for (let r = 0, o = s.length; r < o; r++)
+function D(t, s, e = null) {
+  for (let r = 0, n = s.length; r < n; r++)
     t.insertBefore(s[r], e);
 }
 function N(t, s, e, r) {
   if (e === void 0)
     return t.textContent = "";
-  const o = r || document.createTextNode("");
+  const n = r || document.createTextNode("");
   if (s.length) {
-    let n = !1;
+    let o = !1;
     for (let u = s.length - 1; u >= 0; u--) {
       const l = s[u];
-      if (o !== l) {
+      if (n !== l) {
         const i = l.parentNode === t;
-        n || u ? i && l.remove() : i ? t.replaceChild(o, l) : t.insertBefore(o, e);
+        o || u ? i && l.remove() : i ? t.replaceChild(n, l) : t.insertBefore(n, e);
       } else
-        n = !0;
+        o = !0;
     }
   } else
-    t.insertBefore(o, e);
-  return [o];
+    t.insertBefore(n, e);
+  return [n];
 }
 var st = et("<div class=emoji-animator><span>");
 const rt = (t) => {
-  const { emojis: s, duration: e, onAnimationEnd: r, size: o = "2em" } = t, n = s.length, u = e || 500 * n, [l, i] = function(f, b) {
-    const d = { value: f, observers: null, observerSlots: null, comparator: (b = b ? Object.assign({}, O, b) : O).equals || void 0 };
-    return [$.bind(d), (c) => (typeof c == "function" && (c = c(d.value)), J(d, c))];
+  const { emojis: s, duration: e, onAnimationEnd: r, size: n = "2em" } = t, o = s.length, u = e || 500 * o, [l, i] = function(f, b) {
+    const p = { value: f, observers: null, observerSlots: null, comparator: (b = b ? Object.assign({}, O, b) : O).equals || void 0 };
+    return [$.bind(p), (c) => (typeof c == "function" && (c = c(p.value)), K(p, c))];
   }(s[0]);
-  return _(() => {
+  return U(() => {
     let f = 0;
     const b = setInterval(() => {
-      f = (f + 1) % n, i(s[f]), f === n - 1 && r && r();
-    }, u / n);
+      f = (f + 1) % s.length, i(s[f]), f === s.length - 1 && r && r();
+    }, u / s.length);
     return () => clearInterval(b);
-  }), p = st(), a = p.firstChild, o != null ? p.style.setProperty("font-size", o) : p.style.removeProperty("font-size"), function(f, b, d, c) {
-    if (d === void 0 || c || (c = []), typeof b != "function")
-      return j(f, b, c, d);
-    F((h) => j(f, b(), h, d), c);
-  }(a, l), p;
-  var p, a;
+  }), U(() => {
+    i(s[0]);
+  }), h = st(), a = h.firstChild, n != null ? h.style.setProperty("font-size", n) : h.style.removeProperty("font-size"), function(f, b, p, c) {
+    if (p === void 0 || c || (c = []), typeof b != "function")
+      return j(f, b, c, p);
+    F((d) => j(f, b(), d, p), c);
+  }(a, l), h;
+  var h, a;
 };
 export {
   rt as default

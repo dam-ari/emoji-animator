@@ -18,19 +18,25 @@ const EmojiAnimator = (props: EmojiArray) => {
 
   const [currentEmoji, setCurrentEmoji] = createSignal(emojis[0]);
 
+  // Effect to handle the emoji animation
   createEffect(() => {
     let currentIndex = 0;
 
     const interval = setInterval(() => {
-      currentIndex = (currentIndex + 1) % emojiCount;
+      currentIndex = (currentIndex + 1) % emojis.length;
       setCurrentEmoji(emojis[currentIndex]);
 
-      if (currentIndex === emojiCount - 1 && onAnimationEnd) {
+      if (currentIndex === emojis.length - 1 && onAnimationEnd) {
         onAnimationEnd();
       }
-    }, animationDuration / emojiCount);
+    }, animationDuration / emojis.length);
 
     return () => clearInterval(interval);
+  });
+
+  // Effect to update the current emoji when the emojis prop changes
+  createEffect(() => {
+    setCurrentEmoji(emojis[0]);
   });
 
   return (
