@@ -1,0 +1,10 @@
+.emoji-animator {
+    display: inline-block;
+    overflow: hidden;
+  }
+  
+  .emoji {
+    display: inline-block;
+    white-space: nowrap;
+  }
+  
