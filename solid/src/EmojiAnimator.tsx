@@ -2,6 +2,8 @@ import { createEffect, createSignal } from "solid-js";
 import "./EmojiAnimator.css";
 
 export type EmojiArray = {
+  name?: string;
+  description?: string;
   emojis: string[];
   size: string;
   duration: number;
