@@ -1,17 +1,17 @@
-const W = (e, t) => e === t, K = {
-  equals: W
+const Z = (e, t) => e === t, K = {
+  equals: Z
 };
-let L = V;
-const y = 1, w = 2, U = {
+let U = M;
+const y = 1, w = 2, z = {
   owned: null,
   cleanups: null,
   context: null,
   owner: null
 };
 var a = null;
-let j = null, Z = null, c = null, h = null, g = null, S = 0;
-function X(e, t) {
-  const s = c, n = a, r = e.length === 0, i = t === void 0 ? n : t, o = r ? U : {
+let j = null, X = null, c = null, h = null, g = null, S = 0;
+function Y(e, t) {
+  const s = c, n = a, r = e.length === 0, i = t === void 0 ? n : t, o = r ? z : {
     owned: null,
     cleanups: null,
     context: i ? i.context : null,
@@ -24,23 +24,23 @@ function X(e, t) {
     c = s, a = n;
   }
 }
-function z(e, t) {
+function F(e, t) {
   t = t ? Object.assign({}, K, t) : K;
   const s = {
     value: e,
     observers: null,
     observerSlots: null,
     comparator: t.equals || void 0
-  }, n = (r) => (typeof r == "function" && (r = r(s.value)), F(s, r));
+  }, n = (r) => (typeof r == "function" && (r = r(s.value)), I(s, r));
   return [ee.bind(s), n];
 }
 function P(e, t, s) {
-  const n = I(e, t, !1, y);
+  const n = V(e, t, !1, y);
   E(n);
 }
-function Y(e, t, s) {
-  L = ne;
-  const n = I(e, t, !1, y), r = R && D(R);
+function R(e, t, s) {
+  U = ne;
+  const n = V(e, t, !1, y), r = B && D(B);
   r && (n.suspense = r), (!s || !s.render) && (n.user = !0), g ? g.push(n) : E(n);
 }
 function N(e) {
@@ -57,7 +57,7 @@ function N(e) {
 function D(e) {
   return a && a.context && a.context[e.id] !== void 0 ? a.context[e.id] : e.defaultValue;
 }
-let R;
+let B;
 function ee() {
   if (this.sources && this.state)
     if (this.state === y)
@@ -72,12 +72,12 @@ function ee() {
   }
   return this.value;
 }
-function F(e, t, s) {
+function I(e, t, s) {
   let n = e.value;
   return (!e.comparator || !e.comparator(n, t)) && (e.value = t, e.observers && e.observers.length && C(() => {
     for (let r = 0; r < e.observers.length; r += 1) {
       const i = e.observers[r], o = j && j.running;
-      o && j.disposed.has(i), (o ? !i.tState : !i.state) && (i.pure ? h.push(i) : g.push(i), i.observers && M(i)), o || (i.state = y);
+      o && j.disposed.has(i), (o ? !i.tState : !i.state) && (i.pure ? h.push(i) : g.push(i), i.observers && H(i)), o || (i.state = y);
     }
     if (h.length > 1e6)
       throw h = [], new Error();
@@ -101,13 +101,13 @@ function te(e, t, s) {
   try {
     n = e.fn(t);
   } catch (o) {
-    return e.pure && (e.state = y, e.owned && e.owned.forEach(x), e.owned = null), e.updatedAt = s + 1, H(o);
+    return e.pure && (e.state = y, e.owned && e.owned.forEach(x), e.owned = null), e.updatedAt = s + 1, J(o);
   } finally {
     c = i, a = r;
   }
-  (!e.updatedAt || e.updatedAt <= s) && (e.updatedAt != null && "observers" in e ? F(e, n) : e.value = n, e.updatedAt = s);
+  (!e.updatedAt || e.updatedAt <= s) && (e.updatedAt != null && "observers" in e ? I(e, n) : e.value = n, e.updatedAt = s);
 }
-function I(e, t, s, n = y, r) {
+function V(e, t, s, n = y, r) {
   const i = {
     fn: e,
     state: n,
@@ -121,7 +121,7 @@ function I(e, t, s, n = y, r) {
     context: a ? a.context : null,
     pure: s
   };
-  return a === null || a !== U && (a.owned ? a.owned.push(i) : a.owned = [i]), i;
+  return a === null || a !== z && (a.owned ? a.owned.push(i) : a.owned = [i]), i;
 }
 function _(e) {
   if (e.state === 0)
@@ -150,16 +150,16 @@ function C(e, t) {
     const n = e();
     return se(s), n;
   } catch (n) {
-    s || (g = null), h = null, H(n);
+    s || (g = null), h = null, J(n);
   }
 }
 function se(e) {
-  if (h && (V(h), h = null), e)
+  if (h && (M(h), h = null), e)
     return;
   const t = g;
-  g = null, t.length && C(() => L(t), !1);
+  g = null, t.length && C(() => U(t), !1);
 }
-function V(e) {
+function M(e) {
   for (let t = 0; t < e.length; t++)
     _(e[t]);
 }
@@ -182,10 +182,10 @@ function A(e, t) {
     }
   }
 }
-function M(e) {
+function H(e) {
   for (let t = 0; t < e.observers.length; t += 1) {
     const s = e.observers[t];
-    s.state || (s.state = w, s.pure ? h.push(s) : g.push(s), s.observers && M(s));
+    s.state || (s.state = w, s.pure ? h.push(s) : g.push(s), s.observers && H(s));
   }
 }
 function x(e) {
@@ -215,7 +215,7 @@ function re(e) {
     cause: e
   });
 }
-function H(e, t = a) {
+function J(e, t = a) {
   throw re(e);
 }
 function ie(e, t, s) {
@@ -251,9 +251,9 @@ function ie(e, t, s) {
           for (; ++d < r && d < i && !(($ = p.get(t[d])) == null || $ !== u + m); )
             m++;
           if (m > u - l) {
-            const Q = t[o];
+            const W = t[o];
             for (; l < u; )
-              e.insertBefore(s[l++], Q);
+              e.insertBefore(s[l++], W);
           } else
             e.replaceChild(s[l++], t[o++]);
         } else
@@ -271,7 +271,7 @@ function le(e, t, s) {
   }, i = t ? () => N(() => document.importNode(n || (n = r()), !0)) : () => (n || (n = r())).cloneNode(!0);
   return i.cloneNode = i, i;
 }
-function J(e, t, s, n) {
+function q(e, t, s, n) {
   if (s !== void 0 && !n && (n = []), typeof t != "function")
     return v(e, t, n, s);
   P((r) => v(e, t(), r, s), n);
@@ -306,7 +306,7 @@ function v(e, t, s, n, r) {
         if (s = b(e, s, n), o)
           return s;
       } else
-        f ? s.length === 0 ? B(e, l, n) : ie(e, s, l) : (s && b(e), B(e, l));
+        f ? s.length === 0 ? k(e, l, n) : ie(e, s, l) : (s && b(e), k(e, l));
       s = l;
     } else if (t.nodeType) {
       if (Array.isArray(s)) {
@@ -347,7 +347,7 @@ function T(e, t, s, n) {
   }
   return r;
 }
-function B(e, t, s = null) {
+function k(e, t, s = null) {
   for (let n = 0, r = t.length; n < r; n++)
     e.insertBefore(t[n], s);
 }
@@ -372,13 +372,13 @@ function b(e, t, s, n) {
 function oe(e) {
   return Object.keys(e).reduce((s, n) => {
     const r = e[n];
-    return s[n] = Object.assign({}, r), G(r.value) && !he(r.value) && !Array.isArray(r.value) && (s[n].value = Object.assign({}, r.value)), Array.isArray(r.value) && (s[n].value = r.value.slice(0)), s;
+    return s[n] = Object.assign({}, r), Q(r.value) && !he(r.value) && !Array.isArray(r.value) && (s[n].value = Object.assign({}, r.value)), Array.isArray(r.value) && (s[n].value = r.value.slice(0)), s;
   }, {});
 }
 function ue(e) {
   return e ? Object.keys(e).reduce((s, n) => {
     const r = e[n];
-    return s[n] = G(r) && "value" in r ? r : {
+    return s[n] = Q(r) && "value" in r ? r : {
       value: r
     }, s[n].attribute || (s[n].attribute = ae(n)), s[n].parse = "parse" in s[n] ? s[n].parse : typeof s[n].value != "string", s;
   }, {}) : {};
@@ -390,13 +390,13 @@ function ce(e, t) {
   const s = oe(t);
   return Object.keys(t).forEach((r) => {
     const i = s[r], o = e.getAttribute(i.attribute), l = e[r];
-    o && (i.value = i.parse ? q(o) : o), l != null && (i.value = Array.isArray(l) ? l.slice(0) : l), i.reflect && k(e, i.attribute, i.value), Object.defineProperty(e, r, {
+    o && (i.value = i.parse ? G(o) : o), l != null && (i.value = Array.isArray(l) ? l.slice(0) : l), i.reflect && L(e, i.attribute, i.value), Object.defineProperty(e, r, {
       get() {
         return i.value;
       },
       set(f) {
         const p = i.value;
-        i.value = f, i.reflect && k(this, i.attribute, i.value);
+        i.value = f, i.reflect && L(this, i.attribute, i.value);
         for (let u = 0, d = this.__propertyChangedCallbacks.length; u < d; u++)
           this.__propertyChangedCallbacks[u](r, f, p);
       },
@@ -405,7 +405,7 @@ function ce(e, t) {
     });
   }), s;
 }
-function q(e) {
+function G(e) {
   if (e)
     try {
       return JSON.parse(e);
@@ -413,7 +413,7 @@ function q(e) {
       return e;
     }
 }
-function k(e, t, s) {
+function L(e, t, s) {
   if (s == null || s === !1)
     return e.removeAttribute(t);
   let n = JSON.stringify(s);
@@ -422,7 +422,7 @@ function k(e, t, s) {
 function ae(e) {
   return e.replace(/\.?([A-Z]+)/g, (t, s) => "-" + s.toLowerCase()).replace("_", "-").replace(/^-/, "");
 }
-function G(e) {
+function Q(e) {
   return e != null && (typeof e == "object" || typeof e == "function");
 }
 function he(e) {
@@ -469,7 +469,7 @@ function de(e, t) {
       if (this.__initialized && !this.__updating[r] && (r = this.lookupProp(r), r in t)) {
         if (o == null && !this[r])
           return;
-        this[r] = t[r].parse ? q(o) : o;
+        this[r] = t[r].parse ? G(o) : o;
       }
     }
     lookupProp(r) {
@@ -504,7 +504,7 @@ function ge(e, t = {}, s = {}) {
 function ye(e) {
   const t = Object.keys(e), s = {};
   for (let n = 0; n < t.length; n++) {
-    const [r, i] = z(e[t[n]]);
+    const [r, i] = F(e[t[n]]);
     Object.defineProperty(s, t[n], {
       get: r,
       set(o) {
@@ -525,13 +525,13 @@ function be(e) {
 function Ce(e) {
   return (t, s) => {
     const { element: n } = s;
-    return X((r) => {
+    return Y((r) => {
       const i = ye(t);
       n.addPropertyChangedCallback((l, f) => i[l] = f), n.addReleaseCallback(() => {
         n.renderRoot.textContent = "", r();
       });
       const o = e(i, s);
-      return J(n.renderRoot, o);
+      return q(n.renderRoot, o);
     }, be(n));
   };
 }
@@ -545,16 +545,18 @@ const Ae = (e) => {
     duration: s,
     onAnimationEnd: n,
     size: r = "2em"
-  } = e, i = t.length, o = i * 500, l = s || o, [f, p] = z(t[0]);
-  return Y(() => {
+  } = e, o = t.length * 500, l = s || o, [f, p] = F(t[0]);
+  return R(() => {
     let u = 0;
     const d = setInterval(() => {
-      u = (u + 1) % i, p(t[u]), u === i - 1 && n && n();
-    }, l / i);
+      u = (u + 1) % t.length, p(t[u]), u === t.length - 1 && n && n();
+    }, l / t.length);
     return () => clearInterval(d);
+  }), R(() => {
+    p(t[0]);
   }), (() => {
     var u = _e(), d = u.firstChild;
-    return r != null ? u.style.setProperty("font-size", r) : u.style.removeProperty("font-size"), J(d, f), u;
+    return r != null ? u.style.setProperty("font-size", r) : u.style.removeProperty("font-size"), q(d, f), u;
   })();
 };
 we("emoji-animator", {

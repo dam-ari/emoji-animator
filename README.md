@@ -13,7 +13,7 @@ Welcome to the Emoji Animator Web Component! This reusable Web Component, built 
 - **Customizable**: Adjust emoji size and animation duration.
 
 ## Demo
-![snip🎥.mp4](https://github.com/dam-ari/emoji-animator/blob/master/snip%F0%9F%8E%A5.mp4)
+[snip🎥.mp4](./snip🎥.mp4)
 
 ## 📦 Installation
 
