@@ -1,1 +1,1 @@
-.emoji-animator{display:inline-block;overflow:hidden}.emoji{display:inline-block;white-space:nowrap}
+.emoji-animator{display:inline-block;overflow:hidden;transition:opacity .5s ease-in-out}.emoji{display:inline-block;white-space:nowrap}.fade-in{opacity:0;animation:fadeIn .5s ease-in-out forwards}@keyframes fadeIn{0%{opacity:.7}to{opacity:1}}

@@ -2,48 +2,67 @@ import { createEffect, createSignal } from "solid-js";
 import "./EmojiAnimator.css";
 
 export type EmojiArray = {
-  name?: string;
-  description?: string;
-  emojis: string[];
-  size: string;
-  duration: number;
-  onAnimationEnd?: () => void;
+    name?: string;
+    description?: string;
+    emojis: string[];
+    size?: string;
+    duration?: number;
+    fadeIn?: boolean;
+    reverseLoop?: boolean;
+    onAnimationEnd?: () => void;
+    class?: string;
+    style?: Record<string, string>;
 };
 
 const EmojiAnimator = (props: EmojiArray) => {
-  const { emojis, duration, onAnimationEnd, size = "2em" } = props;
-  const emojiCount = emojis.length;
-  const defaultDuration = emojiCount * 500; // 0.5 second per emoji if duration is not provided
-  const animationDuration = duration || defaultDuration;
+    const { emojis = [], duration = 5000, onAnimationEnd, size = "2em", fadeIn = false, reverseLoop = false, class: className, style } = props;
+    const [currentEmoji, setCurrentEmoji] = createSignal(emojis[0] || "");
+    const [currentSet, setCurrentSet] = createSignal(emojis);
+    const [isFading, setIsFading] = createSignal(false);
+    let intervalId: number;
 
-  const [currentEmoji, setCurrentEmoji] = createSignal(emojis[0]);
+    createEffect(() => {
+        clearInterval(intervalId);
+        console.log("Initializing EmojiAnimator with emojis:", emojis);
+        setCurrentSet(emojis);
+        let currentIndex = 0;
+        let direction = 1;
 
-  // Effect to handle the emoji animation
-  createEffect(() => {
-    let currentIndex = 0;
+        intervalId = setInterval(() => {
+            const current = currentSet();
+            const len = current.length;
+            if (len > 0) {
+                currentIndex += direction;
 
-    const interval = setInterval(() => {
-      currentIndex = (currentIndex + 1) % emojis.length;
-      setCurrentEmoji(emojis[currentIndex]);
+                if (currentIndex === len || currentIndex === -1) {
+                    if (reverseLoop) {
+                        direction *= -1;
+                        currentIndex += direction * 2;
+                    } else {
+                        currentIndex = 0;
+                    }
 
-      if (currentIndex === emojis.length - 1 && onAnimationEnd) {
-        onAnimationEnd();
-      }
-    }, animationDuration / emojis.length);
+                    if (currentIndex === len - 1 && onAnimationEnd) {
+                        onAnimationEnd();
+                    }
+                }
 
-    return () => clearInterval(interval);
-  });
+                setCurrentEmoji(currentSet()[currentIndex]);
+                setIsFading(true);
+                setTimeout(() => setIsFading(false), 500);
+            }
+        }, duration / (currentSet().length || 1));
 
-  // Effect to update the current emoji when the emojis prop changes
-  createEffect(() => {
-    setCurrentEmoji(emojis[0]);
-  });
+        setCurrentEmoji(emojis[0] || "");
 
-  return (
-    <div class="emoji-animator" style={{ "font-size": size }}>
-      <span>{currentEmoji()}</span>
-    </div>
-  );
+        return () => clearInterval(intervalId); // Ensure cleanup
+    });
+
+    return (
+        <div class={`emoji-animator ${className || ''}`} style={{ "font-size": size, ...style }}>
+            <span class={fadeIn && isFading() ? "fade-in" : ""}>{currentEmoji()}</span>
+        </div>
+    );
 };
 
 export default EmojiAnimator;
