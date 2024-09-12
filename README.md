@@ -186,7 +186,3 @@ Contributions are welcome! Please read the [CONTRIBUTING.md](CONTRIBUTING.md) fo
 ## 🙌 Acknowledgements
 
 Thank you to everyone who has contributed to this project. Your support is greatly appreciated!
-
----
-
-Feel free to replace `yourusername` with your actual GitHub username or the appropriate URL if you're hosting the component elsewhere.
