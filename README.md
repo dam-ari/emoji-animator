@@ -1,6 +1,3 @@
-Sure! Here's a concise and friendly README.md for your `emoji-animator` repository:
-
----
 
 # 🌟 Emoji Animator Web Component 🌟
 
